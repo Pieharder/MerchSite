@@ -17,9 +17,7 @@ class MerchControl extends React.Component {
   handleEditClick = () => {
     this.setState({editing: true});
   }
-
-
-  
+ 
   handleClick = () => {
     if (this.state.selectedMerch != null) {
       this.setState({
@@ -33,7 +31,6 @@ class MerchControl extends React.Component {
       }));
     }
   }
-
 
   handleChangingSelectedMerch = (id) => {
     const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
@@ -56,30 +53,27 @@ class MerchControl extends React.Component {
       .concat(merchToEdit);
       this.setState({masterMerchList: editedMasterMerchList, editing: false, selectedMerch: null});
   }
-
   
   handleRestock = (item) => {
-    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== item.id);
     const newMerchItem = {
       name: item.name,
       description: item.description,
       quantity: parseInt(item.quantity) + 1,
       id: item.id
     }
-    const newerList = newMasterMerchList.concat(newMerchItem);
-    this.setState({masterMerchList: newerList});
+    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== item.id).concat(newMerchItem);
+    this.setState({masterMerchList: newMasterMerchList});
   }
   
   handleAddToCart = (item) => {
-    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== item.id);
     const newMerchItem = {
       name: item.name,
       description: item.description,
       quantity: parseInt(item.quantity) - 1,
       id: item.id
     }
-    const newerList = newMasterMerchList.concat(newMerchItem);
-    this.setState({masterMerchList: newerList});
+    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== item.id).concat(newMerchItem);
+    this.setState({masterMerchList: newMasterMerchList});
   }
   
   render(){
